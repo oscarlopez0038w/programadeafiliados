@@ -1,0 +1,198 @@
+.container {
+  padding: 24px;
+  background: #f6f7fb;
+  min-height: 100vh;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #1f2937;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.table thead {
+  background: #363f53;
+  color: white;
+}
+
+.table th {
+  text-align: left;
+  padding: 14px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.table td {
+  padding: 14px;
+  border-bottom: 1px solid #9baccc;
+  font-size: 14px;
+  color: #374151;
+}
+
+.table tbody tr:hover {
+  background: #eaeaeb;
+  transition: 0.2s ease;
+}
+
+.table tbody tr:nth-child(even) {
+  background: #fafafa;
+}
+.button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 7px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.button:hover {
+  background: #1e40af;
+}
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+
+  margin-bottom: 18px;
+  padding: 14px 16px;
+
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+.toolbar select {
+  padding: 9px 12px;
+
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  background: #f9fafb;
+
+  font-size: 14px;
+  color: #111827;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.toolbar select:focus {
+  outline: none;
+  border-color: #2563eb;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+.search {
+  flex: 1;
+  max-width: 320px;
+
+  padding: 10px 14px;
+
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  background: #f9fafb;
+
+  font-size: 14px;
+  color: #111827;
+
+  transition: all 0.2s ease;
+}
+.search::placeholder {
+  color: #9ca3af;
+}
+.search:focus {
+  outline: none;
+  background: #ffffff;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+/* ============================= */
+/* PAGINACION */
+/* ============================= */
+
+.paginacion {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+
+  margin-top: 20px;
+  padding: 14px;
+
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+
+/* texto pagina */
+.paginacion span {
+  font-size: 14px;
+  color: #374151;
+  font-weight: 500;
+}
+
+/* botones */
+.paginacion button {
+  padding: 8px 14px;
+
+  border-radius: 8px;
+  border: none;
+
+  background: #2563eb;
+  color: white;
+
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.paginacion button:hover:not(:disabled) {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.paginacion button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* estado disabled elegante */
+.paginacion button:disabled {
+  background: #e5e7eb;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* ============================= */
+/* RESPONSIVE SUAVE */
+/* ============================= */
+
+@media (max-width: 768px) {
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search {
+    max-width: 100%;
+  }
+
+  .paginacion {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

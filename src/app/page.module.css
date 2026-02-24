@@ -1,0 +1,50 @@
+.main {
+  width: 100%;
+  min-height: 100vh;
+  background: #f3f4f6; /* gris SaaS moderno */
+}
+
+/* contenedor central */
+.container {
+  max-width: 1800px;
+  margin: 0 auto;
+  padding: 24px 28px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 28px;
+}
+.background {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+/* sección doble */
+.divider {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  transition: all 0.3s ease;
+}
+.fullWidth {
+  grid-template-columns: 1fr;
+}
+/* footer */
+.footer {
+  text-align: center;
+  font-size: 13px;
+  color: #9ca3af;
+  margin-top: 30px;
+}
+
+/* responsive */
+@media (max-width: 1200px) {
+  .divider {
+    grid-template-columns: 1fr;
+  }
+
+  .container {
+    padding: 20px;
+  }
+}

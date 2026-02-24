@@ -1,0 +1,74 @@
+/* ===== NAVBAR ===== */
+
+.navbar {
+  height: 64px;
+  width: 100%;
+
+  background: #005baa;
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 28px;
+
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* ===== LADO IZQUIERDO ===== */
+
+.left {
+  display: flex;
+  align-items: center;
+}
+
+/* ===== LOGO / TITULO ===== */
+
+.logo {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+/* ===== MENU ===== */
+
+.menu {
+  display: flex;
+  gap: 10px;
+}
+
+/* ===== LINKS ===== */
+
+.link {
+  background: transparent;
+  border: none;
+  color: white;
+
+  padding: 8px 16px;
+  border-radius: 8px;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+/* hover elegante */
+
+.link:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* ===== LINK ACTIVO ===== */
+
+.active {
+  background: white;
+  color: #005baa;
+  font-weight: 600;
+}
