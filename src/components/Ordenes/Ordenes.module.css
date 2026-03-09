@@ -2,7 +2,7 @@
   background: white;
   border-radius: 12px;
   padding: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
   width: 100%;
 }
 
@@ -12,6 +12,25 @@
   margin-bottom: 15px;
 }
 
+/* BUSCADOR */
+
+.search {
+  width: 260px;
+  max-width: 100%;
+  padding: 10px 14px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  border: 2px solid #e5e5e5;
+  font-size: 14px;
+  outline: none;
+}
+
+.search:focus {
+  border-color: #0a7;
+}
+
+/* TABLA */
+
 .table {
   display: flex;
   flex-direction: column;
@@ -20,7 +39,7 @@
 
 .header {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1.3fr 1.4fr 1fr 1fr 0.8fr;
   font-weight: bold;
   text-align: center;
   padding-bottom: 10px;
@@ -29,7 +48,7 @@
 
 .row {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1.3fr 1.4fr 1fr 1fr 0.8fr;
   text-align: center;
   padding: 10px 0;
   align-items: center;
@@ -45,34 +64,15 @@
   color: #0a7;
 }
 
-.empty {
-  text-align: center;
-  padding: 40px;
-  background: white;
-  border-radius: 12px;
-}
-/* BUSCADOR */
-.search {
-  width: 20%;
-  padding: 10px 14px;
-  margin-bottom: 16px;
-  border-radius: 8px;
-  border: 2px solid #e5e5e5;
-  font-size: 14px;
-  outline: none;
-}
-
-.search:focus {
-  border-color: #0a7;
-}
-
 /* PAGINACION */
+
 .pagination {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 20px;
   gap: 10px;
+  flex-wrap: wrap;
 }
 
 .pagination button {
@@ -84,21 +84,99 @@
   cursor: pointer;
   font-weight: 500;
 }
+
 .pagination button:hover {
-    background: #004a8c;
+  background: #004a8c;
   transform: translateY(-1px);
 }
+
 .pagination button:disabled {
   background: #ccc;
   cursor: not-allowed;
 }
 
-.pagination button {
-  padding: 6px 12px;
-  cursor: pointer;
+/* ========================= */
+/* TABLET */
+/* ========================= */
+
+@media (max-width: 1024px) {
+
+  .header {
+    grid-template-columns: 1.2fr 1.3fr 1fr 1fr;
+  }
+
+  .row {
+    grid-template-columns: 1.2fr 1.3fr 1fr 1fr;
+  }
+
+  /* ocultamos estado */
+  .header span:nth-child(5),
+  .row span:nth-child(5) {
+    display: none;
+  }
 }
 
-.pagination button:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
+/* ========================= */
+/* MOBILE */
+/* ========================= */
+
+@media (max-width: 640px) {
+
+  .header {
+    display: none;
+  }
+
+  .row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    gap: 6px;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+  }
+
+  .row span {
+    font-size: 14px;
+  }
+
+  .row span:nth-child(1)::before {
+    content: "ID: ";
+    font-weight: 600;
+  }
+
+  .row span:nth-child(2)::before {
+    content: "Vendedor: ";
+    font-weight: 600;
+  }
+
+  .row span:nth-child(3)::before {
+    content: "Monto: ";
+    font-weight: 600;
+  }
+
+  .row span:nth-child(4)::before {
+    content: "Fecha: ";
+    font-weight: 600;
+  }
+
+  .row span:nth-child(5)::before {
+    content: "Estado: ";
+    font-weight: 600;
+  }
+
+  .search {
+    width: 100%;
+  }
+
+  .pagination {
+    gap: 6px;
+  }
+
+  .pagination span {
+    width: 100%;
+    text-align: center;
+  }
+
 }

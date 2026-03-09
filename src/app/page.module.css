@@ -39,11 +39,13 @@
 }
 
 /* responsive */
-@media (max-width: 1200px) {
+@media (max-width: 1560px) {
   .divider {
     grid-template-columns: 1fr;
   }
-
+  .background {
+    flex-direction: column;
+  }
   .container {
     padding: 20px;
   }

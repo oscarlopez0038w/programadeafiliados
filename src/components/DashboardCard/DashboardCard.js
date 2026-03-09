@@ -10,8 +10,8 @@ export default function DashboardCard({
 }) {
   let value = 0;
   let porcentaje = 0;
-  const tasaCambio = 36.62; // Ejemplo: 1 USD = 35 NIO
-  const totalOrdenes = ordenes.length || 1; // evita división entre 0
+  const tasaCambio = 36.6243;
+  const totalOrdenes = ordenes.length || 1;
 
   switch (type) {
     case "total":
@@ -27,9 +27,9 @@ export default function DashboardCard({
       }).format(total);
       break;
     }
-        case "ingresoDolares": {
+    case "ingresoDolares": {
       const total = ordenes.reduce((acc, o) => acc + Number(o.value), 0);
-        const totalDolares = total / tasaCambio;
+      const totalDolares = total / tasaCambio;
       // Formatear a moneda en dólares con separador de miles
       value = new Intl.NumberFormat("en-US", {
         style: "currency",
@@ -37,7 +37,30 @@ export default function DashboardCard({
       }).format(totalDolares);
       break;
     }
+    case "ticketpromedioCordobas": {
+      const total = ordenes.reduce((acc, o) => acc + Number(o.value), 0);
+      const cantidad = ordenes.length || 1; // evita división entre 0
 
+      const ticketpromedio = total / cantidad; // Convertir a dólares
+      // Formatear a moneda en dólares con separador de miles
+      value = new Intl.NumberFormat("es-NI", {
+        style: "currency",
+        currency: "NIO",
+      }).format(ticketpromedio);
+      break;
+    }
+    case "ticketpromedio": {
+      const total = ordenes.reduce((acc, o) => acc + Number(o.value), 0);
+      const cantidad = ordenes.length || 1; // evita división entre 0
+
+      const ticketpromedio = total / cantidad / tasaCambio; // Convertir a dólares
+      // Formatear a moneda en dólares con separador de miles
+      value = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+      }).format(ticketpromedio);
+      break;
+    }
     case "visa": {
       const cantidad = ordenes.filter(
         (o) => o.payment_method === "Visa",

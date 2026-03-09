@@ -11,11 +11,25 @@ export default function DashboardResumen({ ordenes }) {
         type="ingresoDolares"
         url="/moneda.png"
       />
-         <DashboardCard
+      <DashboardCard
         title="Ingreso Total"
         subtitle="Valor acumulado"
         ordenes={ordenes}
         type="ingreso"
+        url="/moneda.png"
+      />
+      <DashboardCard
+        title="Ticket Promedio"
+        subtitle="Valor promedio por orden"
+        ordenes={ordenes}
+        type="ticketpromedio"
+        url="/moneda.png"
+      />
+      <DashboardCard
+        title="Ticket Promedio"
+        subtitle="Valor promedio por orden"
+        ordenes={ordenes}
+        type="ticketpromedioCordobas"
         url="/moneda.png"
       />
       <DashboardCard

@@ -100,3 +100,74 @@
 .secondaryButton:hover {
   background: #e5e7eb;
 }
+/* ================= TABLET ================= */
+
+@media (max-width: 1024px) {
+
+  .container {
+    align-items: flex-start;
+  }
+
+  .filtro {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 640px) {
+
+  .container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .headerInfo {
+    width: 100%;
+  }
+
+  .logo img {
+    width: 60px;
+    height: auto;
+  }
+
+  .titulo {
+    font-size: 18px;
+  }
+
+  .subtitulo {
+    font-size: 13px;
+  }
+
+  .filtro {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .field {
+    width: 100%;
+  }
+
+  .input {
+    width: 100%;
+  }
+
+  .actions {
+    width: 100%;
+    display: flex;
+    gap: 8px;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    flex: 1;
+    padding: 10px;
+    font-size: 14px;
+  }
+
+}

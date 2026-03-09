@@ -12,3 +12,9 @@
   align-items: center;
   gap:20px;
 }
+
+@media screen and (max-width: 1560px) {
+  .subContainer {
+    flex-direction: column;
+  }
+}
