@@ -30,7 +30,7 @@
     "**/*.mts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "src/app/api/users/route.js", "src/app/api/orders/route.js"  ],
   "exclude": [
     "node_modules"
   ]

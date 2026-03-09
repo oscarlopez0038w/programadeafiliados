@@ -13,12 +13,10 @@ export default function useOrdersData() {
   // 🔹 calcular mes actual
   const calcularMesActual = () => {
     const now = new Date();
-    const primerDia = new Date(now.getFullYear(), now.getMonth(), 1)
-      .toISOString()
-      .split("T")[0];
-    const hoy = new Date(now.getFullYear(), now.getMonth(), now.getDate())
-      .toISOString()
-      .split("T")[0];
+   const primerDia = new Date(now.getFullYear(), now.getMonth(), 1)
+  .toLocaleDateString("sv-SE");
+const hoy = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+  .toLocaleDateString("sv-SE");
     return { primerDia, hoy };
   };
 

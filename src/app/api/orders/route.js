@@ -5,15 +5,19 @@ import { supabaseServer } from "../../../lib/supabaseServer";
 function convertirFechaLocal(fechaISO, isEnd = false) {
   const [year, month, day] = fechaISO.split("-").map(Number);
 
-  return new Date(
+  const offset = 6; // Nicaragua UTC-6
+
+  const date = new Date(Date.UTC(
     year,
     month - 1,
     day,
-    isEnd ? 23 : 0,
+    isEnd ? 23 + offset : offset,
     isEnd ? 59 : 0,
     isEnd ? 59 : 0,
-    999,
-  ).toISOString();
+    isEnd ? 999 : 0
+  ));
+
+  return date.toISOString();
 }
 
 export async function GET(request) {
