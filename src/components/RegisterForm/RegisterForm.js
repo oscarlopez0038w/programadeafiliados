@@ -1,11 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { supabase } from "../../lib/supabaseClient";
 import { useRouter } from "next/navigation";
 import styles from "./RegisterForm.module.css";
+
 export default function RegisterForm() {
   const router = useRouter();
+
+  // 🔒 evita múltiples submits simultáneos
+  const submittingRef = useRef(false);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,6 +20,9 @@ export default function RegisterForm() {
   const [stores, setStores] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  // ===============================
+  // CARGAR TIENDAS
+  // ===============================
   useEffect(() => {
     const loadStores = async () => {
       const { data, error } = await supabase
@@ -31,12 +38,22 @@ export default function RegisterForm() {
     loadStores();
   }, []);
 
+  // ===============================
+  // REGISTRO
+  // ===============================
   const handleRegister = async (e) => {
     e.preventDefault();
+
+    // 🚨 bloqueo inmediato anti doble submit
+    if (submittingRef.current) return;
+    submittingRef.current = true;
+
     setLoading(true);
 
     try {
-      // 1️⃣ Validar employee_code y tienda asignada
+      // ===============================
+      // 1️⃣ VALIDAR EMPLEADO
+      // ===============================
       const { data: employee, error: empError } = await supabase
         .from("sales_people")
         .select("employee_code, store_id")
@@ -45,30 +62,41 @@ export default function RegisterForm() {
 
       if (empError || !employee) {
         alert("El código de empleado no existe.");
-        setLoading(false);
         return;
       }
 
-      // ✅ Validar tienda correcta
       if (!storeId) {
         alert("Debes seleccionar una tienda.");
-        setLoading(false);
         return;
       }
 
-      // Normalizar tipos
       const employeeStoreId = Number(employee.store_id);
       const selectedStoreId = Number(storeId);
 
       if (employeeStoreId !== selectedStoreId) {
         alert(
-          "La tienda seleccionada no coincide con la tienda asignada al empleado.",
+          "La tienda seleccionada no coincide con la tienda asignada al empleado."
         );
-        setLoading(false);
         return;
       }
 
-      // 2️⃣ Crear usuario en Auth
+      // ===============================
+      // 2️⃣ VALIDAR EMAIL EXISTENTE
+      // ===============================
+      const { data: existingUser } = await supabase
+        .from("app_users")
+        .select("email")
+        .eq("email", email)
+        .maybeSingle();
+
+      if (existingUser) {
+        alert("Este correo ya está registrado.");
+        return;
+      }
+
+      // ===============================
+      // 3️⃣ CREAR USUARIO AUTH
+      // ===============================
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
@@ -78,32 +106,40 @@ export default function RegisterForm() {
       });
 
       if (error) {
-        alert(error.message);
-        setLoading(false);
+        // 🔥 manejo especial rate limit
+        if (error.message?.toLowerCase().includes("rate")) {
+          alert(
+            "Se alcanzó el límite de correos. Espera unos minutos e intenta nuevamente."
+          );
+        } else {
+          alert(error.message);
+        }
         return;
       }
 
       if (!data.user) {
         alert("No se pudo crear el usuario.");
-        setLoading(false);
         return;
       }
 
-      // 3️⃣ Insertar en app_users
-      const { error: insertError } = await supabase.from("app_users").insert({
-        user_id: data.user.id,
-        nombres,
-        apellidos,
-        email,
-        employee_code: employeeCode,
-        role_id: 3, // vendedor
-        store_id: storeId,
-        activo: true,
-      });
+      // ===============================
+      // 4️⃣ INSERTAR APP_USERS
+      // ===============================
+      const { error: insertError } = await supabase
+        .from("app_users")
+        .insert({
+          user_id: data.user.id,
+          nombres,
+          apellidos,
+          email,
+          employee_code: employeeCode,
+          role_id: 3,
+          store_id: storeId,
+          activo: true,
+        });
 
       if (insertError) {
         alert(insertError.message);
-        setLoading(false);
         return;
       }
 
@@ -112,11 +148,16 @@ export default function RegisterForm() {
     } catch (err) {
       console.error(err);
       alert("Error inesperado.");
+    } finally {
+      // ✅ liberar bloqueo SIEMPRE
+      submittingRef.current = false;
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
+  // ===============================
+  // UI
+  // ===============================
   return (
     <form onSubmit={handleRegister} className={styles.form}>
       <h1 className={styles.title}>Crear cuenta</h1>
@@ -189,7 +230,11 @@ export default function RegisterForm() {
         />
       </div>
 
-      <button className={styles.button} disabled={loading}>
+      <button
+        className={styles.button}
+        disabled={loading}
+        type="submit"
+      >
         {loading ? "Registrando..." : "Crear cuenta"}
       </button>
     </form>
