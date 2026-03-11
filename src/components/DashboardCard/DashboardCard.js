@@ -102,8 +102,8 @@ export default function DashboardCard({
             className={styles.image}
             src={url}
             alt="icon"
-            width={32}
-            height={32}
+            width={575}
+            height={415}
           />
         )}
       </div>

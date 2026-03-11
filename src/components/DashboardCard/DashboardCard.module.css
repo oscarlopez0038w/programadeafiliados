@@ -51,8 +51,8 @@
 
 /* icono */
 .image {
-  width: 28px;
-  height: 28px;
+  width: 35px;
+  height: auto;
   border-radius: 8px;
   opacity: 0.85;
 }

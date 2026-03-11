@@ -40,22 +40,22 @@ export default function DashboardResumen({ ordenes }) {
         url="/shopping-cart.png"
       />
       <DashboardCard
-        title="Pagos Visa"
+        title="Tarjeta"
         ordenes={ordenes}
         type="visa"
-        url="/credit.png"
+        url="/Visa_Inc._logo_(2005–2014).png"
       />
       <DashboardCard
-        title="Pagos Mastercard"
+        title="Tarjeta"
         ordenes={ordenes}
         type="mastercard"
-        url="/credit.png"
+        url="/Mastercard-logo.png"
       />
       <DashboardCard
-        title="Pagos American Express"
+        title="Tarjeta"
         ordenes={ordenes}
         type="American Express"
-        url="/credit.png"
+        url="/amex.png"
       />
     </div>
   );
